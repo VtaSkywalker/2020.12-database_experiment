@@ -16,24 +16,29 @@ class Login:
     '''
     @staticmethod
     def loginVerify(user, password, loginType):
-        db = pymysql.connect("localhost", "root", "root", "device_manage")
-        cursor = db.cursor()
-        if(loginType == "Teacher"):
-            sql = "select user from teacher where (user = %s) and (password = %s);" % (user, password)
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            if(len(result) == 0):
-                return False
+        user = "'" + user + "'"
+        password = "'" + password + "'"
+        try:
+            db = pymysql.connect("localhost", "root", "root", "device_manage")
+            cursor = db.cursor()
+            if(loginType == "Teacher"):
+                sql = "select user from teacher where (user = %s) and (password = %s);" % (user, password)
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                if(len(result) == 0):
+                    return False
+                else:
+                    return True
+            
+            elif(loginType == "Student"):
+                sql = "select user from student where (user = %s) and (password = %s);" % (user, password)
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                if(len(result) == 0):
+                    return False
+                else:
+                    return True
             else:
-                return True
-        
-        elif(loginType == "Student"):
-            sql = "select user from student where (user = %s) and (password = %s);" % (user, password)
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            if(len(result) == 0):
                 return False
-            else:
-                return True
-        else:
+        except:
             return False

@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore
 import sys
+from Login import *
 
 '''
     LoginInterface Class
@@ -21,6 +22,26 @@ class LoginInterface(QWidget):
             self.type = "Teacher"
         print("类型：" + self.type)
 
+    def button_push(self):
+        # 获取用户名等基本登录信息
+        self.user = self.lineEdit.text()
+        self.password = self.lineEdit_2.text()
+        if(self.radioButton.isChecked()):
+            self.loginType = "Student"
+        else:
+            self.loginType = "Teacher"
+
+        # 登录
+        if(Login.loginVerify(self.user, self.password, self.loginType)): # 密码正确
+            if(self.loginType == "Teacher"):
+                print("打开教师界面")
+                # TeacherInterface.openWindow(self.user)
+            elif(self.loginType == "Student"):
+                print("打开学生界面")
+                # StudentInterface.openWindow(self.user)
+        else:
+            QMessageBox.information(self, "错误", "No such account or password incorrect!", QMessageBox.Yes)
+
     '''
         方法：init()
         描述：登录界面的mainloop
@@ -36,5 +57,5 @@ class LoginInterface(QWidget):
     def init(self):
         self.setWindowTitle("登录")
         self.lineEdit_2.setEchoMode(2)
-        self.pushButton.clicked.connect(self.test_pushButton)
+        self.pushButton.clicked.connect(self.button_push)
         self.show()
