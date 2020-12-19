@@ -19,6 +19,7 @@ class StudentInterface(QWidget):
         输出：无
         返回：无
         协作类：LoginInterface、StudentQueryDevInerface、StudentQueryAskInerface
+        负责人：caimx
     '''
     def openWindow(self, user):
         self.user = user

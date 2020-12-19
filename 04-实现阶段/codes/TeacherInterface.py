@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import sys
+from AddDevInterface import *
 
 
 class TeacherInterface(QWidget):
@@ -10,6 +11,10 @@ class TeacherInterface(QWidget):
 
     def click_test(self):
         print("按钮点击！传递参数：" + self.user)
+
+    def openAddDevInterface(self):
+        self.AddDevInterfaceWindow = AddDevInterface()
+        self.AddDevInterfaceWindow.openWindow(self.user)
 
     '''
         方法：openWindow(str user)
@@ -24,7 +29,7 @@ class TeacherInterface(QWidget):
     def openWindow(self, user):
         self.user = user
         self.setWindowTitle("教师用户界面-" + self.user)
-        self.pushButton.clicked.connect(self.click_test) # click(添加设备)
+        self.pushButton.clicked.connect(self.openAddDevInterface) # click(添加设备)
         self.pushButton_2.clicked.connect(self.click_test) # click(维修/报废设备)
         self.pushButton_3.clicked.connect(self.click_test) # click(申请审批)
         self.pushButton_4.clicked.connect(self.click_test) # click(我管理的设备)
