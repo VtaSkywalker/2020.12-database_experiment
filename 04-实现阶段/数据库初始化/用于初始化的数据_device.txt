@@ -1,0 +1,4 @@
+114661 hxmt medium 10 2020-7-2 87821.86 huiyan 3 admin1 admin1 空闲
+114535 fast large 500 1970-1-1 98121.17 guizhou 1 admin2 admin2 空闲
+114658 wfst small 2.5 1986-2-3 7190.53 USTC 6 admin3 admin3 空闲
+571100 DSP_DM DSP642 1 2008-8-8 923.12 WHU 10 admin4 admin4 空闲
