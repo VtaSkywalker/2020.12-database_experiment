@@ -157,7 +157,7 @@ openWindow(str user){
                 msgbox("Please enter full info!")
             else{
                 Device.state = "空闲"
-                if(AddDevInterface.addDevReq(input.Device))
+                if(AddDev.addDevReq(input.Device))
                     msgbox("Success!")
                 else
                     msgbox("Fail!")
