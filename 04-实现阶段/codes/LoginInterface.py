@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtCore
 import sys
 from Login import *
+from TeacherInterface import *
 
 '''
     LoginInterface Class
@@ -33,12 +34,21 @@ class LoginInterface(QWidget):
 
         # 登录
         if(Login.loginVerify(self.user, self.password, self.loginType)): # 密码正确
+            
+            # 自适应缩放
+            QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
+            
             if(self.loginType == "Teacher"):
                 print("打开教师界面")
-                # TeacherInterface.openWindow(self.user)
+                # 创建窗口
+                self.TeacherInterfaceWindow = TeacherInterface()
+                self.TeacherInterfaceWindow.openWindow(self.user)
             elif(self.loginType == "Student"):
                 print("打开学生界面")
                 # StudentInterface.openWindow(self.user)
+            
+            self.close()
+
         else:
             QMessageBox.information(self, "错误", "No such account or password incorrect!", QMessageBox.Yes)
 
