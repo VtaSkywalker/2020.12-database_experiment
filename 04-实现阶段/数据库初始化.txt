@@ -1,0 +1,47 @@
+create database device_manage;
+
+use device_manage;
+
+create table teacher(
+user char(20) primary key,
+password char(20),
+name char(20)
+);
+
+create table device(
+id int(7) primary key,
+name char(150),
+type char(50),
+parameter float(7, 2),
+date_buy date,
+price float(9, 2),
+manufactor char(150),
+warranty_period int(3),
+bought_by char(70),
+manager_user char(20),
+state char(20)
+);
+
+create table student(
+user char(20) primary key,
+password char(20),
+name char(20)
+);
+
+create table fix_record(
+teacher_user char(20) references teacher(user),
+device_id int(7) references device(id),
+date_upload date,
+reason text,
+primary key (teacher_user, device_id)
+);
+
+create table ask_record(
+student_user char(20) references student(user),
+device_id int(7) references device(id),
+date_ask date,
+is_pass enum('Y', 'N', 'P') default 'P',
+date_start date,
+days int,
+primary key (student_user, device_id)
+);
