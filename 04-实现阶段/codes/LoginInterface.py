@@ -4,6 +4,7 @@ from PyQt5 import QtCore
 import sys
 from Login import *
 from TeacherInterface import *
+from StudentInterface import *
 
 '''
     LoginInterface Class
@@ -45,7 +46,9 @@ class LoginInterface(QWidget):
                 self.TeacherInterfaceWindow.openWindow(self.user)
             elif(self.loginType == "Student"):
                 print("打开学生界面")
-                # StudentInterface.openWindow(self.user)
+                # 创建窗口
+                self.StudentInterfaceWindow = StudentInterface()
+                self.StudentInterfaceWindow.openWindow(self.user)
             
             self.close()
 

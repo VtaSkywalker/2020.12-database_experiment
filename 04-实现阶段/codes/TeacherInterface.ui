@@ -29,6 +29,7 @@
    </property>
    <property name="font">
     <font>
+     <family>Adobe 仿宋 Std R</family>
      <pointsize>12</pointsize>
     </font>
    </property>
@@ -47,6 +48,7 @@
    </property>
    <property name="font">
     <font>
+     <family>Adobe 仿宋 Std R</family>
      <pointsize>12</pointsize>
     </font>
    </property>
@@ -65,6 +67,7 @@
    </property>
    <property name="font">
     <font>
+     <family>Adobe 仿宋 Std R</family>
      <pointsize>12</pointsize>
     </font>
    </property>
@@ -83,6 +86,7 @@
    </property>
    <property name="font">
     <font>
+     <family>Adobe 仿宋 Std R</family>
      <pointsize>12</pointsize>
     </font>
    </property>
