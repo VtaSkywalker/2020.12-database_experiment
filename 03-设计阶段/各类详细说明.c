@@ -91,7 +91,7 @@ loginVerify(str user, str password, str type){
     }
 }
 
-/* TeacherInerface Class */
+/* TeacherInterface Class */
 /*
     方法：openWindow(str user)
     描述：教师图形界面的mainloop
@@ -99,7 +99,7 @@ loginVerify(str user, str password, str type){
     外部输入：无
     输出：无
     返回：无
-    协作类：LoginInterface、AddDevInerface、FixDevInerface、ApprovalInerface、TeacherQueryDevInerface    
+    协作类：LoginInterface、AddDevInterface、FixDevInterface、ApprovalInterface、TeacherQueryDevInterface    
 */
 openWindow(str user){
     self.user = user
@@ -117,7 +117,7 @@ openWindow(str user){
     }
 }
 
-/* StudentInerface Class */
+/* StudentInterface Class */
 /*
     方法：openWindow(str user)
     描述：学生图形界面的mainloop
@@ -125,7 +125,7 @@ openWindow(str user){
     外部输入：无
     输出：无
     返回：无
-    协作类：LoginInterface、StudentQueryDevInerface、StudentQueryAskInerface
+    协作类：LoginInterface、StudentQueryDevInterface、StudentQueryAskInterface
 */
 openWindow(str user){
     self.user = user
@@ -139,7 +139,7 @@ openWindow(str user){
     }
 }
 
-/* AddDevInerface Class */
+/* AddDevInterface Class */
 /*
     方法：openWindow(str user)
     描述：教师添加设备界面的mainloop
@@ -147,7 +147,7 @@ openWindow(str user){
     外部输入：仪器的各种信息
     输出：无
     返回：无
-    协作类：TeacherInerface、AddDev
+    协作类：TeacherInterface、AddDev
 */
 openWindow(str user){
     self.user = user
@@ -168,7 +168,7 @@ openWindow(str user){
     }
 }
 
-/* FixDevInerface Class */
+/* FixDevInterface Class */
 /*
     方法：openWindow(str user)
     描述：教师维修/报废界面的mainloop
@@ -178,7 +178,7 @@ openWindow(str user){
         2、维修/报废原因
     输出：无
     返回：无
-    协作类：TeacherInerface、FixDev
+    协作类：TeacherInterface、FixDev
 */
 openWindow(str user){
     self.user = user
@@ -203,7 +203,7 @@ openWindow(str user){
     }
 }
 
-/* ApprovalInerface Class */
+/* ApprovalInterface Class */
 /*
     方法：openWindow(str user)
     描述：教师审批界面的mainloop
@@ -213,7 +213,7 @@ openWindow(str user){
         2、同意/拒绝的理由
     输出：无
     返回：无
-    协作类：TeacherInerface、Approval、TeacherQueryAsk
+    协作类：TeacherInterface、Approval、TeacherQueryAsk
 */
 openWindow(str user){
     self.user = user
@@ -248,7 +248,7 @@ openWindow(str user){
     }
 }
 
-/* TeacherQueryDevInerface Class */
+/* TeacherQueryDevInterface Class */
 /*
     方法：openWindow(str user)
     描述：教师查询设备界面的mainloop
@@ -256,7 +256,7 @@ openWindow(str user){
     外部输入：设备筛选条件
     输出：无
     返回：无
-    协作类：TeacherInerface、TeacherQueryDev
+    协作类：TeacherInterface、TeacherQueryDev
 */
 openWindow(str user){
     self.user = user
@@ -277,7 +277,7 @@ openWindow(str user){
     }
 }
 
-/* StudentQueryDevInerface Class */
+/* StudentQueryDevInterface Class */
 /*
     方法：openWindow(str user)
     描述：学生查询设备界面的mainloop
@@ -287,7 +287,7 @@ openWindow(str user){
         2、借用天数
     输出：无
     返回：无
-    协作类：StudentInerface、StudentQueryDev、AskDev
+    协作类：StudentInterface、StudentQueryDev、AskDev
 */
 openWindow(str user){
     self.user = user
@@ -313,7 +313,7 @@ openWindow(str user){
     }
 }
 
-/* StudentQueryAskInerface Class */
+/* StudentQueryAskInterface Class */
 /*
     方法：openWindow(str user)
     描述：学生查询申请界面的mainloop
@@ -321,7 +321,7 @@ openWindow(str user){
     外部输入：设备id
     输出：无
     返回：无
-    协作类：StudentInerface、StudentQueryAsk、ReleaseDev
+    协作类：StudentInterface、StudentQueryAsk、ReleaseDev
 */
 openWindow(str user){
     self.user = user
@@ -422,7 +422,7 @@ fixDevReq(str user, int devId, int mode, Date date, str reason){
     外部输入：无
     输出：无
     返回：审批操作是否成功
-    协作类：ApprovalInerface、DB
+    协作类：ApprovalInterface、DB
 */
 approvalReq(str user, int devId, boolean op){
     if(op == false){ // 拒绝
@@ -458,7 +458,7 @@ approvalReq(str user, int devId, boolean op){
     外部输入：无
     输出：无
     返回：查询结果
-    协作类：ApprovalInerface、DB
+    协作类：ApprovalInterface、DB
 */
 queryAskReq(Ask a){
     // 设备id
@@ -486,7 +486,7 @@ queryAskReq(Ask a){
     外部输入：无
     输出：无
     返回：查询结果
-    协作类：TeacherQueryDevInerface、DB
+    协作类：TeacherQueryDevInterface、DB
 */
 queryDevReq(Device dev){
     // 设备id
@@ -561,7 +561,7 @@ queryDevReq(Device dev){
     外部输入：无
     输出：无
     返回：查询结果
-    协作类：StudentQueryDevInerface、DB
+    协作类：StudentQueryDevInterface、DB
 */
 queryDevReq(Device dev){
     // 设备id
@@ -642,7 +642,7 @@ queryDevReq(Device dev){
         3、申请使用天数
     输出：无
     返回：申请是否有效
-    协作类：StudentQueryDevInerface、DB
+    协作类：StudentQueryDevInterface、DB
 */
 askDevReq(str user, int devId, int days){
     // 设备状态必须为'空闲'才可以申请
@@ -671,7 +671,7 @@ askDevReq(str user, int devId, int days){
     外部输入：无
     输出：无
     返回：查询结果
-    协作类：StudentQueryAskInerface、DB
+    协作类：StudentQueryAskInterface、DB
 */
 queryAskReq(str user, int devId){
     // 学生账号
@@ -700,7 +700,7 @@ queryAskReq(str user, int devId){
     外部输入：无
     输出：无
     返回：释放是否成功
-    协作类：StudentQueryAskInerface、DB
+    协作类：StudentQueryAskInterface、DB
 */
 releaseDevReq(int devId){
     releaseSql = "update device set state = '空闲' where id = %s" % str(devId)

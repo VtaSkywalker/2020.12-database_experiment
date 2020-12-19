@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import sys
 from AddDevInterface import *
+from FixDevInterface import *
 
 
 class TeacherInterface(QWidget):
@@ -15,6 +16,10 @@ class TeacherInterface(QWidget):
     def openAddDevInterface(self):
         self.AddDevInterfaceWindow = AddDevInterface()
         self.AddDevInterfaceWindow.openWindow(self.user)
+
+    def openFixDevInterface(self):
+        self.FixDevInterfaceWindow = FixDevInterface()
+        self.FixDevInterfaceWindow.openWindow(self.user)
 
     '''
         方法：openWindow(str user)
@@ -30,7 +35,7 @@ class TeacherInterface(QWidget):
         self.user = user
         self.setWindowTitle("教师用户界面-" + self.user)
         self.pushButton.clicked.connect(self.openAddDevInterface) # click(添加设备)
-        self.pushButton_2.clicked.connect(self.click_test) # click(维修/报废设备)
+        self.pushButton_2.clicked.connect(self.openFixDevInterface) # click(维修/报废设备)
         self.pushButton_3.clicked.connect(self.click_test) # click(申请审批)
         self.pushButton_4.clicked.connect(self.click_test) # click(我管理的设备)
         '''if(click(添加设备))
