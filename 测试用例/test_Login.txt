@@ -1,0 +1,6 @@
+user1 abc123 Student 1
+user3 abc123 Student 0
+user2 abc124 Student 0
+admin3 admin4 Teacher 0
+admin2 admin2 Teacher 1
+user2 abc123 Teacher 0
