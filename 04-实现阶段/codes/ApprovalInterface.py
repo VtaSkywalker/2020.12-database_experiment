@@ -8,6 +8,47 @@ class ApprovalInterface(QWidget):
         super().__init__()
         loadUi('ApprovalInterface.ui', self)
 
+    # 点击“查询”关联动作
+    def query(self):
+        # 更新device_id
+        if(self.lineEdit.text() == ""):
+            self.device_id = "*"
+        else:
+            self.device_id = self.lineEdit.text()
+        # 更新user_student
+        if(self.lineEdit_2.text() == ""):
+            self.user_student = "*"
+        else:
+            self.user_student = self.lineEdit_2.text()
+        # 检查合理性
+        [result, reason] = self.check()
+        if(result):
+            # 显示查询结果
+            print("传递参数给TeacherQueryAsk：%s, %s, %s" % (self.device_id, self.user_student, self.user))
+        else:
+            QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
+
+    # 检查参数合理性
+    def check(self):
+        # 检查id是否合理
+        if(self.device_id != "*"):
+            try:
+                int(self.device_id)
+            except:
+                return [False, "设备id应该是数字！"]
+        # 检查无误
+        return [True, "检查无误！"]
+
+    # 同意请求
+    def agree(self):
+        '''更新选中的项'''
+        print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, True))
+
+    # 拒绝请求
+    def reject(self):
+        '''更新选中的项'''
+        print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, False))
+
     '''
         方法：openWindow(str user)
         描述：教师审批界面的mainloop
@@ -29,7 +70,9 @@ class ApprovalInterface(QWidget):
             初始化查询，并显示表格
         '''
 
-        # self.pushButton.clicked.connect()
+        self.pushButton.clicked.connect(self.query)
+        self.pushButton_2.clicked.connect(self.agree)
+        self.pushButton_3.clicked.connect(self.reject)
 
         '''TeacherQueryAsk.queryAskReq(input.Ask)
         if(click(查询)) # 按条件查询

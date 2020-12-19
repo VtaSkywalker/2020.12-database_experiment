@@ -4,6 +4,7 @@ import sys
 from AddDevInterface import *
 from FixDevInterface import *
 from ApprovalInterface import *
+from TeacherQueryDevInterface import *
 
 
 class TeacherInterface(QWidget):
@@ -26,6 +27,10 @@ class TeacherInterface(QWidget):
         self.ApprovalInterfaceWindow = ApprovalInterface()
         self.ApprovalInterfaceWindow.openWindow(self.user)
 
+    def openTeacherQueryDevInterface(self):
+        self.TeacherQueryDevInterfaceWindow = TeacherQueryDevInterface()
+        self.TeacherQueryDevInterfaceWindow.openWindow(self.user)
+
     '''
         方法：openWindow(str user)
         描述：教师图形界面的mainloop
@@ -42,7 +47,7 @@ class TeacherInterface(QWidget):
         self.pushButton.clicked.connect(self.openAddDevInterface) # click(添加设备)
         self.pushButton_2.clicked.connect(self.openFixDevInterface) # click(维修/报废设备)
         self.pushButton_3.clicked.connect(self.openApprovalInterface) # click(申请审批)
-        self.pushButton_4.clicked.connect(self.click_test) # click(我管理的设备)
+        self.pushButton_4.clicked.connect(self.openTeacherQueryDevInterface) # click(我管理的设备)
         '''if(click(添加设备))
             AddDevInterface.openWindow(self.user)
         if(click(维修/报废设备))
