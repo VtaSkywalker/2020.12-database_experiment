@@ -208,9 +208,7 @@ openWindow(str user){
     方法：openWindow(str user)
     描述：教师审批界面的mainloop
     输入：用户账号
-    外部输入：
-        1、申请的各种筛选条件
-        2、同意/拒绝的理由
+    外部输入：申请的各种筛选条件
     输出：无
     返回：无
     协作类：TeacherInterface、Approval、TeacherQueryAsk

@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 import sys
 from AddDevInterface import *
 from FixDevInterface import *
+from ApprovalInterface import *
 
 
 class TeacherInterface(QWidget):
@@ -21,6 +22,10 @@ class TeacherInterface(QWidget):
         self.FixDevInterfaceWindow = FixDevInterface()
         self.FixDevInterfaceWindow.openWindow(self.user)
 
+    def openApprovalInterface(self):
+        self.ApprovalInterfaceWindow = ApprovalInterface()
+        self.ApprovalInterfaceWindow.openWindow(self.user)
+
     '''
         方法：openWindow(str user)
         描述：教师图形界面的mainloop
@@ -36,7 +41,7 @@ class TeacherInterface(QWidget):
         self.setWindowTitle("教师用户界面-" + self.user)
         self.pushButton.clicked.connect(self.openAddDevInterface) # click(添加设备)
         self.pushButton_2.clicked.connect(self.openFixDevInterface) # click(维修/报废设备)
-        self.pushButton_3.clicked.connect(self.click_test) # click(申请审批)
+        self.pushButton_3.clicked.connect(self.openApprovalInterface) # click(申请审批)
         self.pushButton_4.clicked.connect(self.click_test) # click(我管理的设备)
         '''if(click(添加设备))
             AddDevInterface.openWindow(self.user)
