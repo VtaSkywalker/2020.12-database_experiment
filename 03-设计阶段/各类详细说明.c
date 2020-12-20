@@ -331,7 +331,7 @@ openWindow(str user){
                 if(eachX为空)
                     input.eachX = "*"
             }
-            D = StudentQueryAsk.queryAskReq(input.Device, input.devId)
+            D = StudentQueryAsk.queryAskReq(self.user, input.devId)
             update(table, D) // 刷新查询结果
         }
         if(click(释放)){ // 释放仪器
