@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import sys
+from StudentQueryDevInterface import *
 
 
 class StudentInterface(QWidget):
@@ -10,6 +11,10 @@ class StudentInterface(QWidget):
 
     def push_test(self):
         print("按钮触发！传递参数：" + self.user)
+
+    def openStudentQueryDevInterface(self):
+        self.StudentQueryDevInterfaceWindow = StudentQueryDevInterface()
+        self.StudentQueryDevInterfaceWindow.openWindow(self.user)
 
     '''
         方法：openWindow(str user)
@@ -24,8 +29,8 @@ class StudentInterface(QWidget):
     def openWindow(self, user):
         self.user = user
         self.setWindowTitle("学生用户界面-" + self.user)
+        self.pushButton_2.clicked.connect(self.openStudentQueryDevInterface) # click(设备查询)
         self.pushButton.clicked.connect(self.push_test)
-        self.pushButton_2.clicked.connect(self.push_test)
         '''if(click(设备查询))
             AddDevInterface.openWindow(self.user)
         if(click(我的申请))
