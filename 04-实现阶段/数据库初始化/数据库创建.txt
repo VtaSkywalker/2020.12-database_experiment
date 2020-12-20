@@ -18,7 +18,7 @@ price float(9, 2),
 manufactor char(150),
 warranty_period int(3),
 bought_by char(70),
-manager_user char(20),
+manager_user char(20) references teacher(user),
 state char(20)
 );
 
