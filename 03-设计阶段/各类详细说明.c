@@ -633,11 +633,11 @@ queryDevReq(Device dev){
 /*
     方法：askDevReq(str user, int devId, int days)
     描述：处理学生申请设备的请求
-    输入：查询设备时所输入的筛选条件
-    外部输入：
+    输入：
         1、学生用户名
         2、设备id
         3、申请使用天数
+    外部输入：无
     输出：无
     返回：申请是否有效
     协作类：StudentQueryDevInterface、DB
