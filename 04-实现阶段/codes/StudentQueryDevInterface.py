@@ -4,6 +4,7 @@ import sys
 from StudentQueryDev import *
 from PyQt5.QtGui import *
 import time
+from AskDev import *
 
 
 class StudentQueryDevInterface(QWidget):
@@ -68,8 +69,22 @@ class StudentQueryDevInterface(QWidget):
 
     def ask(self):
         self.days = self.spinBox.value() # 申请天数
+        '''
+        if(click(申请)){ # 申请使用仪器
+            if(AskDev.askDevReq(self.user, select.devId, input.days))
+                msgbox("Success!")
+            else
+                msgbox("Fail!")
+        if(click(close))
+            system.close()'''
         # 检查状态是否有效，先暂定在后端处理
-        print("传递到AskDev的参数：%s, input.devId, %s" % (self.user, self.days))
+        # print("传递到AskDev的参数：%s, input.devId, %s" % (self.user, self.days))
+        self.query()
+        if(AskDev.askDevReq(self.user, self.device_id, self.days)):
+            QMessageBox.information(self, "成功", "申请成功！请等待处理", QMessageBox.Yes)
+        else:
+            QMessageBox.information(self, "错误", "操作失败！", QMessageBox.Yes)
+        self.query()
 
     # 更新查询结果
     def updateTable(self, D):
@@ -127,12 +142,5 @@ class StudentQueryDevInterface(QWidget):
 
         self.pushButton_2.clicked.connect(self.ask) # click(申请)
 
-        '''
-        if(click(申请)){ # 申请使用仪器
-            if(AskDev.askDevReq(self.user, select.devId, input.days))
-                msgbox("Success!")
-            else
-                msgbox("Fail!")
-        if(click(close))
-            system.close()'''
+        
         self.show()
