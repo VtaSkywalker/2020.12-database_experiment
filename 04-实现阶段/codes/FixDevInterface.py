@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import sys
 import time
+from FixDev import *
 
 
 class FixDevInterface(QWidget):
@@ -22,7 +23,12 @@ class FixDevInterface(QWidget):
         date = time.strftime("%Y-%m-%d", time.localtime())
         if(result):
             # 留作传递
-            print("传递到fixDevReq的参数：%s, %d, %s, %s, %s" % (self.user, int(device_id), self.mode, date, fix_reason))
+            # print("传递到fixDevReq的参数：%s, %d, %s, %s, %s" % (self.user, int(device_id), self.mode, date, fix_reason))
+            if(FixDev.fixDevReq([self.user, int(device_id), self.mode, date, fix_reason])):
+                QMessageBox.information(self, "成功", "报修成功！", QMessageBox.Yes)
+            else:
+                QMessageBox.information(self, "错误", "操作失败！", QMessageBox.Yes)
+
             '''if(FixDev.fixDevReq(input.user, input.devId, self.mode, date(), input.reason))
                 msgbox("Success!")
             else

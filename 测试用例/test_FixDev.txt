@@ -1,6 +1,2 @@
-【true】admin1 [exist devId] 0 reason1
-【false】user2 [exist devId] 0 reason2
-【false】admin12 [exist devId] 0 reason3
-【true】admin1 [exist devId] 1 reason4
-【false】user2 [exist devId] 1 reason5
-【false】admin12 [exist devId] 1 reason6
+【true】admin1 [exist devId] 0 [date] reason1
+【true】admin1 [exist devId] 1 [date] reason4

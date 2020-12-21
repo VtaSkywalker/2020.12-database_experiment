@@ -32,8 +32,7 @@ create table fix_record(
 teacher_user char(20) references teacher(user),
 device_id int(7) references device(id),
 date_upload date,
-reason text,
-primary key (teacher_user, device_id)
+reason text
 );
 
 create table ask_record(
@@ -42,6 +41,5 @@ device_id int(7) references device(id),
 date_ask date,
 is_pass enum('Y', 'N', 'P') default 'P',
 date_start date,
-days int,
-primary key (student_user, device_id)
+days int
 );
