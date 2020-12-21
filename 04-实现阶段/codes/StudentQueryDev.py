@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import numpy as np
 import pymysql
 
-=======
-import pymysql
-import numpy as np
->>>>>>> bc5948a297f42a19604335b09ea6127a52e758eb
+
 class StudentQueryDev():
     """
         方法：queryDevReq(Device dev)
@@ -19,7 +15,6 @@ class StudentQueryDev():
     """
     @staticmethod
     def queryDevReq(devlist):
-<<<<<<< HEAD
         
         querySqlDeviceIdPart = "" if ( devlist[0] == "*") else  "device.id = %s and" %devlist[0]
         querySqlNamePart = "" if ( devlist[1] == "*") else  "device.name = '%s' and" %devlist[1]
@@ -32,19 +27,6 @@ class StudentQueryDev():
         querySqlBBPart = "" if ( devlist[8] == "*") else  "device.bought_by = '%s' and" %devlist[8]
         querySqlMUPart = "" if ( devlist[9] == "*") else  "device.manager_user = '%s' and" %devlist[9]
         querySqlStatePart = "" if ( devlist[10] == "*") else  "device.state = '%s' and" %devlist[10]
-=======
-        querySqlDeviceIdPart = "" if ( device[0] == "*") else  "device.id = %d and" %device[0]
-        querySqlNamePart = "" if ( devlist[1] == "*") else  "device.name = %s and" %device[1]
-        querySqlTypePart = "" if ( devlist[2] == "*") else  "device.type = %s and" %device[2]
-        querySqlParameterPart = "" if ( devlist[3] == "*") else  "device.parameter = %f and" %device[3]
-        querySqlDateBuyPart = "" if ( devlist[4] == "*") else  "device.data_buy = %s and" %device[4]
-        querySqlPricePart = "" if ( devlist[5] == "*") else  "device.price = %f and" %device[5]
-        querySqlManufactorPart = "" if ( devlist[6] == "*") else  "device.manufactor = %s and" %device[6]
-        querySqlWPPart = "" if ( devlist[7] == "*") else  "device.warranty_period = %d and" %device[7]
-        querySqlBBPart = "" if ( devlist[8] == "*") else  "device.bought_by = %s and" %device[8]
-        querySqlMUPart = "" if ( devlist[9] == "*") else  "device.manage_user = %s and" %device[9]
-        querySqlStatePart = "" if ( devlist[10] == "*") else  "device.state = %s " %device[10]
->>>>>>> bc5948a297f42a19604335b09ea6127a52e758eb
         
         db =pymysql.connect(host="localhost", 
                         user="root", 
