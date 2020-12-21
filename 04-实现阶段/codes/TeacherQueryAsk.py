@@ -10,6 +10,7 @@ class TeacherQueryAsk():
         输出：无
         返回：查询结果
         协作类：ApprovalInterface、DB
+        负责人：zzr
     """
     @staticmethod
     def queryAskReq(Asklist):
@@ -18,14 +19,15 @@ class TeacherQueryAsk():
         if(Asklist[0]== '*'):
             querySqlDeviceIdPart = ""
         else:
-            querySqlDeviceIdPart = "ask_record.id = %s" % Asklist[0]
+            querySqlDeviceIdPart = "ask_record.device_id = %s and" % Asklist[0]
         # 学生账号
-        if  Asklist[1] == '*'：
+        if  Asklist[1] == '*':
             querySqlUserStudentPart = ""
-        else：
-            querySqlUserStudentPart = "ask_record.user = '%s'" % Asklist[1]
-        querySql = "select ask_record.user, ask_record.id, ask_record.date_ask, ask_record.days from (ask_record join device) where '%s' and '%s' and device.manager_user = '%s' and ask_record.id = device.id and is_pass = 'P'" % (querySqlDeviceIdPart, querySqlUserStudentPart, Asklist[2]) # 只选出待处理的进行显示
-        data = cursor.fetchall(querySql)
+        else:
+            querySqlUserStudentPart = "ask_record.student_user = '%s' and" % Asklist[1]
+        querySql = "select ask_record.student_user, ask_record.device_id, ask_record.date_ask, ask_record.days from (ask_record join device) where %s %s device.manager_user = '%s' and ask_record.device_id = device.id and is_pass = 'P'" % (querySqlDeviceIdPart, querySqlUserStudentPart, Asklist[2]) # 只选出待处理的进行显示
+        cursor.execute(querySql)
+        data = cursor.fetchall()
         db.close()
         attribute = np.array(['申请人', '申请设备id','申请日期','审请时间'])
         data = np.array(data)

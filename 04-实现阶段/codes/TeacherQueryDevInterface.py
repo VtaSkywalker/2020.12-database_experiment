@@ -10,6 +10,16 @@ class TeacherQueryDevInterface(QWidget):
         loadUi('TeacherQueryDevInterface.ui', self)
 
     def query(self):
+        '''if(click(查询)) # 按条件查询
+            for eachX in input.Device中的所有属性 # 默认没有筛选条件
+                if(eachX为空)
+                    input.Device.eachX = "*"
+            
+            D = TeacherQueryDev.queryAskReq(input.Device)
+            update(table, D) # 刷新查询结果
+        
+        if(click(close))
+            system.close()'''
         self.device_id = "*" if (self.lineEdit.text() == "") else self.lineEdit.text()
         self.name = "*" if (self.lineEdit_2.text() == "") else self.lineEdit_2.text()
         self.deviceType = "*" if (self.lineEdit_3.text() == "") else self.lineEdit_3.text()
@@ -83,15 +93,6 @@ class TeacherQueryDevInterface(QWidget):
 
         '''Device.manager_user = self.user # 初始化Device的筛选条件
         其余筛选条件全部默认为"*"
-        TeacherQueryDev.queryAskReq(input.Device)
-        if(click(查询)) # 按条件查询
-            for eachX in input.Device中的所有属性 # 默认没有筛选条件
-                if(eachX为空)
-                    input.Device.eachX = "*"
-            
-            D = TeacherQueryDev.queryAskReq(input.Device)
-            update(table, D) # 刷新查询结果
+        TeacherQueryDev.queryAskReq(input.Device)'''
         
-        if(click(close))
-            system.close()'''
         self.show()

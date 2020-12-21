@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from PyQt5.QtGui import *
 import sys
 from Approval import *
+from TeacherQueryAsk import *
 
 
 class ApprovalInterface(QWidget):
@@ -25,7 +27,9 @@ class ApprovalInterface(QWidget):
         [result, reason] = self.check()
         if(result):
             # 显示查询结果
-            print("传递参数给TeacherQueryAsk：%s, %s, %s" % (self.device_id, self.user_student, self.user))
+            # print("传递参数给TeacherQueryAsk：%s, %s, %s" % (self.device_id, self.user_student, self.user))
+            D = TeacherQueryAsk.queryAskReq([self.device_id, self.user_student, self.user])
+            self.updateTable(D)
         else:
             QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
 
@@ -42,21 +46,43 @@ class ApprovalInterface(QWidget):
 
     # 同意请求
     def agree(self):
-        '''更新选中的项'''
+        self.query()
         # print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, True))
         if(Approval.approvalReq(self.user_student, self.device_id, True)):
             QMessageBox.information(self, "成功", "操作成功！", QMessageBox.Yes)
         else:
             QMessageBox.information(self, "错误", "无效操作！", QMessageBox.Yes)
+        self.query()
 
     # 拒绝请求
     def reject(self):
-        '''更新选中的项'''
+        self.query()
         # print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, False))
         if(Approval.approvalReq(self.user_student, self.device_id, False)):
             QMessageBox.information(self, "成功", "操作成功！", QMessageBox.Yes)
         else:
             QMessageBox.information(self, "错误", "无效操作！", QMessageBox.Yes)
+        self.query()
+
+    # 更新查询结果
+    def updateTable(self, D):
+        row = len(D) - 1
+        column = len(D[0])
+        model = QStandardItemModel(row, column)
+        
+
+        if(np.array(D).ndim == 1): # 如果搜索结果为空，只返回了属性列
+            model.setHorizontalHeaderLabels(D)
+        else:
+            model.setHorizontalHeaderLabels(D[0, :])
+            for i in range(row):
+                for j in range(column):
+                    item=QStandardItem(str(D[i + 1, j]))
+                    model.setItem(i, j, item)
+
+        self.tableView.setModel(model)
+        self.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch) # 填充边界
+
 
     '''
         方法：openWindow(str user)
@@ -66,6 +92,7 @@ class ApprovalInterface(QWidget):
         输出：无
         返回：无
         协作类：TeacherInterface、Approval、TeacherQueryAsk
+        负责人：zzr
     '''
     def openWindow(self, user):
         self.user = user
@@ -78,6 +105,7 @@ class ApprovalInterface(QWidget):
         '''
             初始化查询，并显示表格
         '''
+        self.query()
 
         self.pushButton.clicked.connect(self.query)
         self.pushButton_2.clicked.connect(self.agree)
