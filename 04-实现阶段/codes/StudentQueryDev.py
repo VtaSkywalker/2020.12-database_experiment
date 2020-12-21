@@ -1,5 +1,5 @@
-
-
+import pymysql
+import numpy as np
 class StudentQueryDev():
 """
     方法：queryDevReq(Device dev)
@@ -13,7 +13,6 @@ class StudentQueryDev():
 """
     @staticmethod
     def queryDevReq(devlist):
-        
         querySqlDeviceIdPart = "" if ( device[0] == "*") else  "device.id = %d and" %device[0]
         querySqlNamePart = "" if ( devlist[1] == "*") else  "device.name = %s and" %device[1]
         querySqlTypePart = "" if ( devlist[2] == "*") else  "device.type = %s and" %device[2]
