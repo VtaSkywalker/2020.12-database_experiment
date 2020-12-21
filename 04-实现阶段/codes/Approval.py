@@ -32,7 +32,7 @@ class Approval():
         elif op == True:
             agreeSql = "update ask_record set is_pass = 'Y' where student_user = '%s' and device_id = %s" % (user, devId) #修改相应的请求记录为同意
             rejectSql = "update ask_record set is_pass = 'N' where student_user <> '%s' and device_id = %s and is_pass = 'P'" % (user, devId) # 拒绝其他人对这个设备的请求
-            updateStateSql = "update device set state = '使用中' where student_user = '%s' and device_id = %s" % (user, devId) # 更新设备使用状态
+            updateStateSql = "update device set state = '使用中' where id = %s" % (devId) # 更新设备使用状态
             try:
                 cursor.execute(agreeSql)
                 cursor.execute(rejectSql)
@@ -43,8 +43,3 @@ class Approval():
             except:
                 db.close()
                 return False
-
-
-        
-
-        

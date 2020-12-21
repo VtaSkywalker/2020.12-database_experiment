@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import sys
+from Approval import *
 
 
 class ApprovalInterface(QWidget):
@@ -42,12 +43,20 @@ class ApprovalInterface(QWidget):
     # 同意请求
     def agree(self):
         '''更新选中的项'''
-        print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, True))
+        # print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, True))
+        if(Approval.approvalReq(self.user_student, self.device_id, True)):
+            QMessageBox.information(self, "成功", "操作成功！", QMessageBox.Yes)
+        else:
+            QMessageBox.information(self, "错误", "无效操作！", QMessageBox.Yes)
 
     # 拒绝请求
     def reject(self):
         '''更新选中的项'''
-        print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, False))
+        # print("传递参数给Approval：%s, %s, %s" % (self.user_student, self.device_id, False))
+        if(Approval.approvalReq(self.user_student, self.device_id, False)):
+            QMessageBox.information(self, "成功", "操作成功！", QMessageBox.Yes)
+        else:
+            QMessageBox.information(self, "错误", "无效操作！", QMessageBox.Yes)
 
     '''
         方法：openWindow(str user)
