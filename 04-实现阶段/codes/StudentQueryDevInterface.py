@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import sys
+from StudentQueryDev import *
+from PyQt5.QtGui import *
+import time
 
 
 class StudentQueryDevInterface(QWidget):
@@ -23,7 +26,9 @@ class StudentQueryDevInterface(QWidget):
         [result, reason] = self.check_para()
         if(result):
             '''显示查询结果'''
-            print("传送到StudentQueryDev的参数：%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.device_id, self.name, self.deviceType, self.parameter, self.date_buy, self.price, self.manufactor, self.warranty_period, self.bought_by, self.manager_user, self.state))
+            # print("传送到StudentQueryDev的参数：%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.device_id, self.name, self.deviceType, self.parameter, self.date_buy, self.price, self.manufactor, self.warranty_period, self.bought_by, self.manager_user, self.state))
+            D = StudentQueryDev.queryDevReq([self.device_id, self.name, self.deviceType, self.parameter, self.date_buy, self.price, self.manufactor, self.warranty_period, self.bought_by, self.manager_user, self.state])
+            self.updateTable(D)
         else:
             QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
 
@@ -66,6 +71,26 @@ class StudentQueryDevInterface(QWidget):
         # 检查状态是否有效，先暂定在后端处理
         print("传递到AskDev的参数：%s, input.devId, %s" % (self.user, self.days))
 
+    # 更新查询结果
+    def updateTable(self, D):
+        row = len(D) - 1
+        column = len(D[0])
+        model = QStandardItemModel(row, column)
+        
+
+        if(np.array(D).ndim == 1): # 如果搜索结果为空，只返回了属性列
+            model.setHorizontalHeaderLabels(D)
+        else:
+            model.setHorizontalHeaderLabels(D[0, :])
+            for i in range(row):
+                for j in range(column):
+                    item=QStandardItem(str(D[i + 1, j]))
+                    model.setItem(i, j, item)
+
+        self.tableView.setModel(model)
+        # self.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch) # 填充边界
+
+
     '''
         方法：openWindow(str user)
         描述：学生查询设备界面的mainloop
@@ -85,6 +110,8 @@ class StudentQueryDevInterface(QWidget):
         '''
             初始化查询，并显示表格
         '''
+        self.query()
+
         '''筛选条件全部默认为"*"
         StudentQueryDev.queryAskReq(input.Device)'''
 

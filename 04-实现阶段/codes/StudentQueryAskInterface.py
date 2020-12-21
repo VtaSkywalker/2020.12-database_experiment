@@ -78,9 +78,8 @@ class StudentQueryAskInterface(QWidget):
         StudentQueryAsk.queryAskReq(self.user, input.devId)
         while(loop){'''
 
-        '''
-            初始时期，显示所有结果
-        '''
+        # 初始时期，显示全部查询结果
+        self.query()
 
         self.pushButton.clicked.connect(self.query) # click(查询)
         self.pushButton_2.clicked.connect(self.release) # click(释放)
