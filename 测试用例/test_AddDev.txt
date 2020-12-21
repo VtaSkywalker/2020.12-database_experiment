@@ -1,0 +1,3 @@
+【true】1 name type 100 2020-12-21 1200 manufactor warranty_period bought_by admin1 '空闲'
+【false】1 name type 100 2020-12-21 1200 manufactor warranty_period bought_by user1 '空闲'
+【false】1 name type 100 2020-12-21 1200 manufactor warranty_period bought_by admin_233 '空闲'

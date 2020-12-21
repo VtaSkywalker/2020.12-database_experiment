@@ -1,0 +1,3 @@
+【true】user1 [存在的一个空闲设备id] 5
+【false】user1 [存在的一个非空闲设备id] 5
+【false】user20 [存在的一个空闲设备id] 5

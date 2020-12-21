@@ -1,0 +1,2 @@
+【true】user1 [存在的devId]
+【true】user1 *

@@ -661,7 +661,7 @@ askDevReq(str user, int devId, int days){
 
 /* StudentQueryAsk Class */
 /*
-    方法：queryAskReq(str user, int devId, str state)
+    方法：queryAskReq(str user, int devId)
     描述：学生查询的申请记录，根据条件，筛选并打印查询结果
     输入：
         1、学生账号
