@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 import sys
 from StudentQueryAsk import *
 import numpy as np
+from ReleaseDev import *
 
 
 class StudentQueryAskInterface(QWidget):
@@ -39,9 +40,20 @@ class StudentQueryAskInterface(QWidget):
         return [True, "检查无误"]
 
     def release(self):
-        # if(选中的仪器是在使用中) then 释放 else 报错
-        print("传送选中的记录给ReleaseDev，释放选中的仪器")
-        # 刷新查询
+        # print("传送输入的记录给ReleaseDev，释放选中的仪器")
+        self.query() # 刷新查询结果
+        if(ReleaseDev.releaseDevReq(self.devId)):
+            QMessageBox.information(self, "成功", "释放成功！", QMessageBox.Yes)
+        else:
+            QMessageBox.information(self, "错误", "操作失败！", QMessageBox.Yes)
+        '''if(click(释放)) # 释放仪器
+                if(AskDev.releaseDevReq(input.devId))
+                    msgbox("Success!")
+                else
+                    msgbox("Fail!")
+            if(click(close))
+                system.close()'''
+        self.query() # 刷新查询结果
 
     # 更新查询结果
     def updateTable(self, D):
@@ -84,11 +96,4 @@ class StudentQueryAskInterface(QWidget):
         self.pushButton.clicked.connect(self.query) # click(查询)
         self.pushButton_2.clicked.connect(self.release) # click(释放)
 
-        '''if(click(释放)) # 释放仪器
-                if(AskDev.releaseDevReq(select.devId))
-                    msgbox("Success!")
-                else
-                    msgbox("Fail!")
-            if(click(close))
-                system.close()'''
         self.show()
