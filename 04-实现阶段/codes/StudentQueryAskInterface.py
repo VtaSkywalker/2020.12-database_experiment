@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from PyQt5.QtGui import *
 import sys
+from StudentQueryAsk import *
+import numpy as np
 
 
 class StudentQueryAskInterface(QWidget):
@@ -13,7 +16,17 @@ class StudentQueryAskInterface(QWidget):
         [result, reason] = self.check()
         if(reason):
             # 送至后端StudentQueryAsk查询
-            print("传送给StudentQueryAsk的参数：%s, %s" % (self.user, self.devId))
+            D = StudentQueryAsk.queryAskReq(self.user, self.devId)
+            self.updateTable(D)
+
+            '''
+            if(click(查询)) # 按条件查询
+                for eachX in input # 默认没有筛选条件
+                    if(eachX为空)
+                        input.eachX = "*"
+                D = StudentQueryAsk.queryAskReq(self.user, input.devId)
+                update(table, D) # 刷新查询结果'''
+            # print("传送给StudentQueryAsk的参数：%s, %s" % (self.user, self.devId))
         else:
             QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
 
@@ -29,6 +42,25 @@ class StudentQueryAskInterface(QWidget):
         # if(选中的仪器是在使用中) then 释放 else 报错
         print("传送选中的记录给ReleaseDev，释放选中的仪器")
         # 刷新查询
+
+    # 更新查询结果
+    def updateTable(self, D):
+        row = len(D) - 1
+        column = len(D[0])
+        model = QStandardItemModel(row, column)
+        
+
+        if(np.array(D).ndim == 1): # 如果搜索结果为空，只返回了属性列
+            model.setHorizontalHeaderLabels(D)
+        else:
+            model.setHorizontalHeaderLabels(D[0, :])
+            for i in range(row):
+                for j in range(column):
+                    item=QStandardItem(str(D[i + 1, j]))
+                    model.setItem(i, j, item)
+
+        self.tableView.setModel(model)
+        self.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch) # 填充边界
 
     '''
         方法：openWindow(str user)
@@ -51,15 +83,6 @@ class StudentQueryAskInterface(QWidget):
         '''
 
         self.pushButton.clicked.connect(self.query) # click(查询)
-
-        '''
-            if(click(查询)) # 按条件查询
-                for eachX in input # 默认没有筛选条件
-                    if(eachX为空)
-                        input.eachX = "*"
-                D = StudentQueryAsk.queryAskReq(self.user, input.devId)
-                update(table, D) # 刷新查询结果'''
-
         self.pushButton_2.clicked.connect(self.release) # click(释放)
 
         '''if(click(释放)) # 释放仪器
