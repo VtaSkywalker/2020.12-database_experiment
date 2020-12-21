@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from PyQt5.QtGui import *
 import sys
 import time
+from TeacherQueryDev import *
 
 
 class TeacherQueryDevInterface(QWidget):
@@ -34,7 +36,9 @@ class TeacherQueryDevInterface(QWidget):
         [result, reason] = self.check_para()
         if(result):
             '''显示查询结果'''
-            print("传送到TeacherQueryDev的参数：%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.device_id, self.name, self.deviceType, self.parameter, self.date_buy, self.price, self.manufactor, self.warranty_period, self.bought_by, self.manager_user, self.state))
+            # print("传送到TeacherQueryDev的参数：%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.device_id, self.name, self.deviceType, self.parameter, self.date_buy, self.price, self.manufactor, self.warranty_period, self.bought_by, self.manager_user, self.state))
+            D = TeacherQueryDev.queryDevReq([self.device_id, self.name, self.deviceType, self.parameter, self.date_buy, self.price, self.manufactor, self.warranty_period, self.bought_by, self.manager_user, self.state])
+            self.updateTable(D)
         else:
             QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
 
@@ -72,6 +76,24 @@ class TeacherQueryDevInterface(QWidget):
         # 检查无误
         return [True, "检查无误"]
 
+    # 更新查询结果
+    def updateTable(self, D):
+        row = len(D) - 1
+        column = len(D[0])
+        model = QStandardItemModel(row, column)
+        
+
+        if(np.array(D).ndim == 1): # 如果搜索结果为空，只返回了属性列
+            model.setHorizontalHeaderLabels(D)
+        else:
+            model.setHorizontalHeaderLabels(D[0, :])
+            for i in range(row):
+                for j in range(column):
+                    item=QStandardItem(str(D[i + 1, j]))
+                    model.setItem(i, j, item)
+
+        self.tableView.setModel(model)
+
     '''
         方法：openWindow(str user)
         描述：教师查询设备界面的mainloop
@@ -90,6 +112,7 @@ class TeacherQueryDevInterface(QWidget):
         '''
             初始化查询，并显示表格
         '''
+        self.query()
 
         '''Device.manager_user = self.user # 初始化Device的筛选条件
         其余筛选条件全部默认为"*"

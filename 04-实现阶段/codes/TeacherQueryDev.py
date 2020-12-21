@@ -1,14 +1,17 @@
 import pymysql
 import time
+import numpy as np
+
 class TeacherQueryDev():    
     """    
-    方法：queryDevReq(Device dev)
-    描述：教师查询自己管理的仪器情况，根据条件，筛选并打印查询结果
-    输入：查询设备时所输入的筛选条件
-    外部输入：无
-    输出：无
-    返回：查询结果
-    协作类：TeacherQueryDevInterface、DB
+        方法：queryDevReq(Device dev)
+        描述：教师查询自己管理的仪器情况，根据条件，筛选并打印查询结果
+        输入：查询设备时所输入的筛选条件
+        外部输入：无
+        输出：无
+        返回：查询结果
+        协作类：TeacherQueryDevInterface、DB
+        负责人：he_pai
     """
     @staticmethod
     def queryDevReq(devlist):
