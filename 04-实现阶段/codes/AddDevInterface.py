@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 import sys
 import re
 import time
+from AddDev import *
 
 class AddDevInterface(QWidget):
     def __init__(self):
@@ -24,7 +25,25 @@ class AddDevInterface(QWidget):
         result, reason = self.check_para([device_id, name, deviceType, parameter, date_buy, price, manufactor, warranty_period, bought_by, manager_user])
         if(result):
             '''在这里调用AddDev'''
-            print("参数传递到AddDev：%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (device_id, name, deviceType, parameter, date_buy, price, manufactor, warranty_period, bought_by, manager_user, state))
+            # print("参数传递到AddDev：%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (device_id, name, deviceType, parameter, date_buy, price, manufactor, warranty_period, bought_by, manager_user, state))
+
+            if(AddDev.addDevReq([device_id, name, deviceType, parameter, date_buy, price, manufactor, warranty_period, bought_by, manager_user, state])):
+                QMessageBox.information(self, "成功", "添加成功！", QMessageBox.Yes)
+            else:
+                QMessageBox.information(self, "错误", "操作失败！", QMessageBox.Yes)
+
+
+            '''if(click(添加)) # 输入信息后确认添加
+            if(Device中除了state外的任何一个属性未被指定)
+                msgbox("Please enter full info!")
+            else
+                Device.state = "空闲"
+                if(AddDev.addDevReq(input.Device))
+                    msgbox("Success!")
+                else
+                    msgbox("Fail!")
+            if(click(close))
+                system.close()'''
         else:
             QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
 
@@ -75,15 +94,5 @@ class AddDevInterface(QWidget):
         self.user = user
         self.setWindowTitle("添加设备-" + self.user)
         self.pushButton.clicked.connect(self.button_click)
-        '''if(click(添加)) # 输入信息后确认添加
-            if(Device中除了state外的任何一个属性未被指定)
-                msgbox("Please enter full info!")
-            else
-                Device.state = "空闲"
-                if(AddDev.addDevReq(input.Device))
-                    msgbox("Success!")
-                else
-                    msgbox("Fail!")
-        if(click(close))
-            system.close()'''
+        
         self.show()
