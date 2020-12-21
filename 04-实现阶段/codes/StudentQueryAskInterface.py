@@ -29,7 +29,6 @@ class StudentQueryAskInterface(QWidget):
             # print("传送给StudentQueryAsk的参数：%s, %s" % (self.user, self.devId))
         else:
             QMessageBox.information(self, "错误", reason, QMessageBox.Yes)
-
     def check(self):
         if(self.devId != "*"):
             try:
@@ -78,8 +77,9 @@ class StudentQueryAskInterface(QWidget):
         StudentQueryAsk.queryAskReq(self.user, input.devId)
         while(loop){'''
 
-        # 初始时期，显示全部查询结果
-        self.query()
+        '''
+            初始时期，显示所有结果
+        '''
 
         self.pushButton.clicked.connect(self.query) # click(查询)
         self.pushButton_2.clicked.connect(self.release) # click(释放)
